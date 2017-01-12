@@ -4,7 +4,7 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 #search{
@@ -15,18 +15,16 @@
 	height: 7vh;
     width:  12vw;
     background-color: #0174DF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
-
-.material-icons
+#blanksearch /*use to up the block button and search*/
 {
-	height: 30px;
-	width: 30px;
-	position:relative;
-    top: 15%;
-    left: 5%;
-    right: 50%;
-    bottom: 50%;
+    height: 10vh;
+    width: 100vw;
 }
 
 /*#chargement
