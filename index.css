@@ -18,7 +18,7 @@
 
 
      z-index:5;
-     background:url('rainbow.png');
+     background:url('rainbowfinish.png');
     animation: bounce 0.35s ease infinite alternate;
 }
 @keyframes bounce{
