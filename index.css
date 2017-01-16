@@ -7,6 +7,25 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+#image
+{
+    position: absolute;
+    top: 3%;
+    left: 43%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+
+
+     z-index:5;
+     background:url('rainbow.png');
+    animation: bounce 0.35s ease infinite alternate;
+}
+@keyframes bounce{
+     from {transform: translateY(0);}
+     to   {transform: translateY(-20px);}
+}
+
 #search{
 	width: 60vw;
 }
