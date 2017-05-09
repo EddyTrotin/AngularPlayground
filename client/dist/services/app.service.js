@@ -10,26 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var app_service_1 = require("./services/app.service");
-require("rxjs/add/operator/switchMap");
-var AppComponent = (function () {
-    function AppComponent(AppService) {
-        this.AppService = AppService;
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/map");
+var AppService = (function () {
+    function AppService(http) {
+        this.http = http;
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        console.log('Task Service Initialized...');
     }
-    AppComponent.prototype.logFbUser = function () {
-        console.log("test button");
-        window.location.href = "api/auth/facebook";
-    };
-    return AppComponent;
+    return AppService;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'my-app',
-        templateUrl: '../app/app.component.html',
-        providers: [app_service_1.AppService]
-    }),
-    __metadata("design:paramtypes", [app_service_1.AppService])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+AppService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], AppService);
+exports.AppService = AppService;
+//# sourceMappingURL=app.service.js.map
