@@ -1,93 +1,113 @@
 var express = require('express');
 var router = express.Router();
-var graph = require('fbgraph');
-var http = require('http');
+var FB = require('fb');
+var https = require('https');
+var url = require('url');
 
-// this should really be in a config file!
-var conf = {
-    client_id:      '320802311671510',
-    client_secret:  '72e1096cd5b8380a83db8c74db879857',
-    scope:          'email, user_about_me, user_birthday, user_location',
-    redirect_uri:   'http://localhost:3000/'
-};
+var token = null;
 
+// // this should really be in a config file!
+// var conf = {
+//    client_id:      '320802311671510',
+//    client_secret:  '72e1096cd5b8380a83db8c74db879857',
+//    scope:          'email, user_about_me, user_birthday, user_location',
+//    redirect_uri:   'http://localhost:3000/'
+// };
 
-router.get('/auth/facebook', function(req, res) {
+router.get('/getFbCode', function(req, res){
 
-  // we don't have a code yet
-  // so we'll redirect to the oauth dialog
-  if (!req.query.code) {
-    var authUrl = graph.getOauthUrl({
-        "client_id":     conf.client_id,
-        "redirect_uri":  conf.redirect_uri,
-        "scope":         conf.scope
-    });
+   res.redirect(`https://www.facebook.com/v2.9/dialog/oauth?client_id=320802311671510&redirect_uri=http://localhost:3000/`);
 
-    if (!req.query.error) { //checks whether a user denied the app facebook login/permissions
-      res.redirect(authUrl);
-    } else {  //req.query.error == 'access_denied'
-      res.send('access denied');
-    }
-    return;
-  }
-
-  // code is set
-  // we'll send that and get the access token
-  graph.authorize({
-      "client_id":      conf.client_id,
-      "redirect_uri":   conf.redirect_uri,
-      "client_secret":  conf.client_secret,
-      "code":           req.query.code
-  }, function (err, facebookRes) {
-    res.redirect('/UserHasLoggedIn');
-  });
 
 
 });
 
 
-// user gets sent here after being authorized
-router.get('/UserHasLoggedIn', function(req, res) {
-  res.render("index", { title: "Logged In" });
-});
+
+router.get('/setFbAccessToken/:code', function(req, response){
+
+
+   const code = req.params.code;
+   console.log("code : " + code);
+   const uri = "https://graph.facebook.com/v2.9/oauth/access_token?client_id=320802311671510&redirect_uri=http://localhost:3000/&client_secret=72e1096cd5b8380a83db8c74db879857&code=" + code +"";
 
 
 
+   https.get(uri, function(res){
+
+      console.log("Got response: " + res.statusCode);
 
 
+      res.on('data', function (body, res) {
+         token = JSON.parse(body).access_token;
+         console.log("Token on res :" + token);
 
+      });
 
+   });
 
-
-
-
-
-
-
-
-// Test
-router.get('/rainbow', (req, res, next) => {
-   // data = https.get('http://graph.facebook.com/facebook/picture?redirect=false');
-   // res = data;
-   //search?q=david&type=user&center=37.76,-122.427&distance=1000
-   graph.setAccessToken("EAACEdEose0cBANFRBzDFBEpozFyFxUwwD51dcw0MRnPl5uA9iEWJ9YhZCJuQFe7HqljoEvuVg6lA9zKQZAqJ9U2fPFk6my4kVOxXXEnj6qHoMwSFeMZCldXzM1gZAHAKto21mKqxZAqj0eosmCGZBxA5S4z4RVFxSvXnAqjPF7y0xGSf3BS1nmxcDddTAhfbs864Oi7yH00wZDZD"); // get it via https://developers.facebook.com/tools/explorer/ for now
-
-   // Options de base pour utiliser le sdk graph
-   var options = {
-       timeout:  3000,
-       pool:     { maxSockets:  Infinity },
-       headers:  { connection:  "keep-alive" }
-   };
-
-   // Fait une requête en get. Ici on passe en paramètre un simple ID (celui d'Henri Menard)
-   graph
-     .setOptions(options)
-     .get("1214608344", function(err, res) {
-       console.log(res);
-     });
-
+   response.sendStatus(200);
 
 });
+
+
+
+
+//
+// passport.use(new FacebookStrategy({
+//    clientID: '320802311671510',
+//    clientSecret: '72e1096cd5b8380a83db8c74db879857',
+//    callbackURL: "http://localhost:3000/"
+// },
+// function(accessToken, refreshToken, profile, cb) {
+//    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+//       return cb(err, user);
+//    });
+// }
+// ));
+//
+//
+// router.get('/auth/facebook',
+// passport.authenticate('facebook', { scope: ['user_location', 'user_birthday'] }));
+//
+// router.get('/auth/facebook/callback',
+// passport.authenticate('facebook', { failureRedirect: '/login' }),
+// function(req, res) {
+//    // Successful authentication, redirect home.
+//    console.log("lol1");
+//    res.redirect('/');
+// });
+//
+//
+// FB.api('oauth/access_token', {
+//    client_id: '320802311671510',
+//    client_secret: '72e1096cd5b8380a83db8c74db879857',
+//    redirect_uri: 'http://localhost:3000/',
+//    code: 'AQC8YR2J598rff65PU8qdnvnR54aqoxKOu2gbYkmL-9f0sYqDJitmnjjLAAP86EKmQzoYprSgAjQx8BFq4iRBN9JyQaaj64WYcgx3BkPkFLywenS_dcxQ137IrbuDui1iBwkjQe1R8uj4x-lmQSQkMMCvUKsv6C-x2IitWqfuEBWH9prcjmyydtoD1mzIbgzKy4r12ua9GcYVr0-6ihPfAAISDdG7N8izem4fxf7EW12G302gBv1mp-j2LjWulnPV5Ftr07Dry3uwLw9TXY2YCmLGPv9Gy3x-8YXlFzaeo0-VH69WK6eY-9Bc7gcEtuvJJyb6n52wm3abq7miyMBcPFW#_=_'
+// }, function (res) {
+//    console.log("lol1");
+//    if(!res || res.error) {
+//       console.log(!res ? 'error occurred' : res.error);
+//       return;
+//    }
+//
+//    var accessToken = res.access_token;
+//    console.log("token : " + accessToken);
+//    var expires = res.expires ? res.expires : 0;
+// });
+//
+
+
+//
+// FB.api('me', { fields: ['id', 'name', 'birthday'] }, function (res) {
+//   if(!res || res.error) {
+//     console.log(!res ? 'error occurred' : res.error);
+//     return;
+//   }
+//   console.log(res.id);
+//   console.log(res.name);
+//   console.log(res.birthday);
+// });
 
 
 module.exports = router;

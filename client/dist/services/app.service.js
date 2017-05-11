@@ -16,8 +16,15 @@ var AppService = (function () {
     function AppService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        console.log('Task Service Initialized...');
+        console.log('App Service Initialized...');
     }
+    AppService.prototype.logFbUser = function () {
+        window.location.href = "api/getFbCode";
+    };
+    AppService.prototype.setFbAccessToken = function (code) {
+        console.log("calling setFbAccessToken");
+        return this.http.get('/api/setFbAccessToken/' + code).map(function (res) { return res; });
+    };
     return AppService;
 }());
 AppService = __decorate([

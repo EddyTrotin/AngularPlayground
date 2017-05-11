@@ -15,10 +15,30 @@ require("rxjs/add/operator/switchMap");
 var AppComponent = (function () {
     function AppComponent(AppService) {
         this.AppService = AppService;
+        this.flag = false;
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var code = window.location.href.split('code=').slice(1).toString();
+        console.log(code);
+        if (code) {
+            this.setFbAccessToken(code);
+        }
+    };
     AppComponent.prototype.logFbUser = function () {
-        console.log("test button");
-        window.location.href = "api/auth/facebook";
+        this.AppService.logFbUser();
+    };
+    AppComponent.prototype.setFbAccessToken = function (code) {
+        var _this = this;
+        this.AppService.setFbAccessToken(code).subscribe(function (res) {
+            console.log(res);
+        }, function (error) { return console.log("Error: ", error); }, function () {
+            _this.flag = true;
+            _this.displayInfos();
+        });
+    };
+    AppComponent.prototype.displayInfos = function () {
+        console.log(this.flag);
+        //TODO : display data
     };
     return AppComponent;
 }());
@@ -26,8 +46,7 @@ AppComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'my-app',
-        templateUrl: '../app/app.component.html',
-        providers: [app_service_1.AppService]
+        templateUrl: '../app/app.component.html'
     }),
     __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppComponent);
