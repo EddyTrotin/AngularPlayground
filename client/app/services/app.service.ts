@@ -14,17 +14,17 @@ export class AppService{
    }
 
    logFbUser() : void{
-       window.location.href = "api/getFbCode";
+       window.location.href = "rainbowdata.api.facebook/getFbCode";
    }
 
    setFbAccessToken(code : string){
       console.log("calling setFbAccessToken");
-      return this.http.get('/api/setFbAccessToken/' + code).map(res => res);
+      return this.http.get('/rainbowdata.api.facebook/setFbAccessToken/' + code).map(res => res);
 
    }
 
    getFbInfos(){
-      return this.http.get('/api/getFbInfos').map(res => res.json());
+      return this.http.get('/rainbowdata.api.facebook/getFbInfos').map(res => res.json());
    }
 
 }

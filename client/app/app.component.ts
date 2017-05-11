@@ -11,8 +11,8 @@ export class AppComponent implements OnInit {
    constructor(
       private AppService: AppService
    ){}
-   
-   infos : any;
+
+   infos : any = null;
 
    ngOnInit(): void{
       const code = window.location.href.split('code=').slice(1).toString();
@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
       this.AppService.getFbInfos().subscribe(infos => {
          this.infos = infos;
 
-         console.log("Location : " + this.infos.location.name);
          console.log(this.infos);
 
          // console.log("Location : " + this.locationFb);

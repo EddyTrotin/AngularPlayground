@@ -19,14 +19,14 @@ var AppService = (function () {
         console.log('App Service Initialized...');
     }
     AppService.prototype.logFbUser = function () {
-        window.location.href = "api/getFbCode";
+        window.location.href = "rainbowdata.api.facebook/getFbCode";
     };
     AppService.prototype.setFbAccessToken = function (code) {
         console.log("calling setFbAccessToken");
-        return this.http.get('/api/setFbAccessToken/' + code).map(function (res) { return res; });
+        return this.http.get('/rainbowdata.api.facebook/setFbAccessToken/' + code).map(function (res) { return res; });
     };
     AppService.prototype.getFbInfos = function () {
-        return this.http.get('/api/getFbInfos').map(function (res) { return res.json(); });
+        return this.http.get('/rainbowdata.api.facebook/getFbInfos').map(function (res) { return res.json(); });
     };
     return AppService;
 }());

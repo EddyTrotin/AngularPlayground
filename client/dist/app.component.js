@@ -15,6 +15,7 @@ require("rxjs/add/operator/switchMap");
 var AppComponent = (function () {
     function AppComponent(AppService) {
         this.AppService = AppService;
+        this.infos = null;
     }
     AppComponent.prototype.ngOnInit = function () {
         var code = window.location.href.split('code=').slice(1).toString();
@@ -39,7 +40,6 @@ var AppComponent = (function () {
         var _this = this;
         this.AppService.getFbInfos().subscribe(function (infos) {
             _this.infos = infos;
-            console.log("Location : " + _this.infos.location.name);
             console.log(_this.infos);
             // console.log("Location : " + this.locationFb);
         });
