@@ -11,8 +11,8 @@ export class AppComponent implements OnInit {
    constructor(
       private AppService: AppService
    ){}
-   flag : boolean = false;
-
+   
+   infos : any;
 
    ngOnInit(): void{
       const code = window.location.href.split('code=').slice(1).toString();
@@ -30,21 +30,23 @@ export class AppComponent implements OnInit {
 
    setFbAccessToken(code : string) : void{
       this.AppService.setFbAccessToken(code).subscribe(res =>{
-
-         console.log(res);
-
-      },error => console.log("Error: ", error), () => {
-
-         this.flag = true;
-         this.displayInfos();
-
-      });
-
+         if(res.status === 200){
+            console.log("OK : token set in server application");
+            this.getFbInfos();
+         }
+      }, error => console.log("Error: ", error))
    }
 
-   displayInfos(): void{
-      console.log(this.flag);
-      //TODO : display data
+   getFbInfos(): void{
+
+      this.AppService.getFbInfos().subscribe(infos => {
+         this.infos = infos;
+
+         console.log("Location : " + this.infos.location.name);
+         console.log(this.infos);
+
+         // console.log("Location : " + this.locationFb);
+      })
 
    }
 

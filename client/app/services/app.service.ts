@@ -15,7 +15,6 @@ export class AppService{
 
    logFbUser() : void{
        window.location.href = "api/getFbCode";
-
    }
 
    setFbAccessToken(code : string){
@@ -24,6 +23,8 @@ export class AppService{
 
    }
 
-   
+   getFbInfos(){
+      return this.http.get('/api/getFbInfos').map(res => res.json());
+   }
 
 }

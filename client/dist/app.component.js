@@ -15,7 +15,6 @@ require("rxjs/add/operator/switchMap");
 var AppComponent = (function () {
     function AppComponent(AppService) {
         this.AppService = AppService;
-        this.flag = false;
     }
     AppComponent.prototype.ngOnInit = function () {
         var code = window.location.href.split('code=').slice(1).toString();
@@ -30,15 +29,20 @@ var AppComponent = (function () {
     AppComponent.prototype.setFbAccessToken = function (code) {
         var _this = this;
         this.AppService.setFbAccessToken(code).subscribe(function (res) {
-            console.log(res);
-        }, function (error) { return console.log("Error: ", error); }, function () {
-            _this.flag = true;
-            _this.displayInfos();
-        });
+            if (res.status === 200) {
+                console.log("OK : token set in server application");
+                _this.getFbInfos();
+            }
+        }, function (error) { return console.log("Error: ", error); });
     };
-    AppComponent.prototype.displayInfos = function () {
-        console.log(this.flag);
-        //TODO : display data
+    AppComponent.prototype.getFbInfos = function () {
+        var _this = this;
+        this.AppService.getFbInfos().subscribe(function (infos) {
+            _this.infos = infos;
+            console.log("Location : " + _this.infos.location.name);
+            console.log(_this.infos);
+            // console.log("Location : " + this.locationFb);
+        });
     };
     return AppComponent;
 }());

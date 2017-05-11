@@ -25,6 +25,9 @@ var AppService = (function () {
         console.log("calling setFbAccessToken");
         return this.http.get('/api/setFbAccessToken/' + code).map(function (res) { return res; });
     };
+    AppService.prototype.getFbInfos = function () {
+        return this.http.get('/api/getFbInfos').map(function (res) { return res.json(); });
+    };
     return AppService;
 }());
 AppService = __decorate([
