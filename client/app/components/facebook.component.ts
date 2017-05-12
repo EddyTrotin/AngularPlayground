@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './services/app.service';
+import { FacebookService } from '../services/facebook.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
    moduleId: module.id,
-   selector: 'my-app',
-   templateUrl: '../app/app.component.html'
+   selector: 'facebook',
+   templateUrl: '../../app/views/facebook.component.html'
 })
-export class AppComponent implements OnInit {
+export class FacebookComponent implements OnInit {
    constructor(
-      private AppService: AppService
+      private FacebookService: FacebookService
    ){}
 
    infos : any = null;
@@ -24,12 +24,12 @@ export class AppComponent implements OnInit {
 
    logFbUser(): void{
 
-      this.AppService.logFbUser();
+      this.FacebookService.logFbUser();
 
    }
 
    setFbAccessToken(code : string) : void{
-      this.AppService.setFbAccessToken(code).subscribe(res =>{
+      this.FacebookService.setFbAccessToken(code).subscribe(res =>{
          if(res.status === 200){
             console.log("OK : token set in server application");
             this.getFbInfos();
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
    getFbInfos(): void{
 
-      this.AppService.getFbInfos().subscribe(infos => {
+      this.FacebookService.getFbInfos().subscribe(infos => {
          this.infos = infos;
 
          console.log(this.infos);

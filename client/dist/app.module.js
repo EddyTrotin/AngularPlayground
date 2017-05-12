@@ -8,9 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
-var app_service_1 = require("./services/app.service");
+var facebook_service_1 = require("./services/facebook.service");
+var linkedin_service_1 = require("./services/linkedin.service");
 var http_1 = require("@angular/http");
-var app_component_1 = require("./app.component");
+var app_component_1 = require("./components/app.component");
+var facebook_component_1 = require("./components/facebook.component");
+var linkedin_component_1 = require("./components/linkedin.component");
 var forms_1 = require("@angular/forms");
 var AppModule = (function () {
     function AppModule() {
@@ -20,9 +23,9 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule],
-        declarations: [app_component_1.AppComponent],
-        providers: [app_service_1.AppService],
-        bootstrap: [app_component_1.AppComponent]
+        declarations: [app_component_1.AppComponent, facebook_component_1.FacebookComponent, linkedin_component_1.LinkedinComponent],
+        providers: [facebook_service_1.FacebookService, linkedin_service_1.LinkedinService],
+        bootstrap: [app_component_1.AppComponent, facebook_component_1.FacebookComponent, linkedin_component_1.LinkedinComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;

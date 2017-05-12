@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var FB = require('fb');
 var https = require('https');
-var config = require('../config');
+var config = require('../config/fbconfig');
 var token = null;
 
 

@@ -10,24 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var app_service_1 = require("./services/app.service");
+var app_service_1 = require("../services/app.service");
 require("rxjs/add/operator/switchMap");
-var AppComponent = (function () {
-    function AppComponent(AppService) {
+var FacebookComponent = (function () {
+    function FacebookComponent(AppService) {
         this.AppService = AppService;
         this.infos = null;
     }
-    AppComponent.prototype.ngOnInit = function () {
+    FacebookComponent.prototype.ngOnInit = function () {
         var code = window.location.href.split('code=').slice(1).toString();
         console.log(code);
         if (code) {
             this.setFbAccessToken(code);
         }
     };
-    AppComponent.prototype.logFbUser = function () {
+    FacebookComponent.prototype.logFbUser = function () {
         this.AppService.logFbUser();
     };
-    AppComponent.prototype.setFbAccessToken = function (code) {
+    FacebookComponent.prototype.setFbAccessToken = function (code) {
         var _this = this;
         this.AppService.setFbAccessToken(code).subscribe(function (res) {
             if (res.status === 200) {
@@ -36,7 +36,7 @@ var AppComponent = (function () {
             }
         }, function (error) { return console.log("Error: ", error); });
     };
-    AppComponent.prototype.getFbInfos = function () {
+    FacebookComponent.prototype.getFbInfos = function () {
         var _this = this;
         this.AppService.getFbInfos().subscribe(function (infos) {
             _this.infos = infos;
@@ -44,16 +44,16 @@ var AppComponent = (function () {
             // console.log("Location : " + this.locationFb);
         });
     };
-    return AppComponent;
+    return FacebookComponent;
 }());
-AppComponent = __decorate([
+FacebookComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'my-app',
-        templateUrl: '../app/app.component.html'
+        selector: 'facebook',
+        templateUrl: '../app/facebook.component.html'
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof app_service_1.AppService !== "undefined" && app_service_1.AppService) === "function" && _a || Object])
-], AppComponent);
-exports.AppComponent = AppComponent;
+], FacebookComponent);
+exports.FacebookComponent = FacebookComponent;
 var _a;
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=facebook.component.js.map
