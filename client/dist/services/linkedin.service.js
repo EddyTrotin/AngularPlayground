@@ -15,8 +15,16 @@ require("rxjs/add/operator/map");
 var LinkedinService = (function () {
     function LinkedinService(http) {
         this.http = http;
+        this.api = "rainbowdata.api.linkedin";
         console.log('App Service Initialized...');
     }
+    LinkedinService.prototype.logLiUser = function () {
+        window.location.href = this.api + "/getLiCode";
+    };
+    LinkedinService.prototype.setLiAccessToken = function (code) {
+        console.log("calling setLiAccessToken");
+        return this.http.get(this.api + '/setLiAccessToken/' + code).map(function (res) { return res; });
+    };
     return LinkedinService;
 }());
 LinkedinService = __decorate([

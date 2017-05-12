@@ -41,6 +41,7 @@ var FacebookComponent = (function () {
         this.FacebookService.getFbInfos().subscribe(function (infos) {
             _this.infos = infos;
             console.log(_this.infos);
+            console.log("dafuk ?");
             // console.log("Location : " + this.locationFb);
         });
     };

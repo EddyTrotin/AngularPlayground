@@ -15,17 +15,18 @@ require("rxjs/add/operator/map");
 var FacebookService = (function () {
     function FacebookService(http) {
         this.http = http;
+        this.api = "rainbowdata.api.facebook";
         console.log('App Service Initialized...');
     }
     FacebookService.prototype.logFbUser = function () {
-        window.location.href = "rainbowdata.api.facebook/getFbCode";
+        window.location.href = this.api + "/getFbCode";
     };
     FacebookService.prototype.setFbAccessToken = function (code) {
         console.log("calling setFbAccessToken");
-        return this.http.get('/rainbowdata.api.facebook/setFbAccessToken/' + code).map(function (res) { return res; });
+        return this.http.get(this.api + '/setFbAccessToken/' + code).map(function (res) { return res; });
     };
     FacebookService.prototype.getFbInfos = function () {
-        return this.http.get('/rainbowdata.api.facebook/getFbInfos').map(function (res) { return res.json(); });
+        return this.http.get(this.api + '/getFbInfos').map(function (res) { return res.json(); });
     };
     return FacebookService;
 }());

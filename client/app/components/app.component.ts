@@ -3,6 +3,8 @@ import 'rxjs/add/operator/switchMap';
 import { Http } from '@angular/http';
 import { FacebookComponent } from './facebook.component';
 import { FacebookService } from '../services/facebook.service';
+import { LinkedinComponent } from './linkedin.component';
+import { LinkedinService } from '../services/linkedin.service';
 
 @Component({
    moduleId: module.id,
@@ -15,9 +17,16 @@ export class AppComponent {
    fbService : FacebookService = new FacebookService(this.http);
    fbComponent : FacebookComponent = new FacebookComponent(this.fbService);
 
+   liService : LinkedinService = new LinkedinService(this.http);
+   liComponent : LinkedinComponent = new LinkedinComponent(this.liService);
+
    logFbUser(){
-      console.log("ki");
       this.fbComponent.logFbUser();
+   }
+
+
+   logLiUser(){
+      this.liComponent.logLiUser();
    }
 
 }

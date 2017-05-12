@@ -12,6 +12,19 @@ export class LinkedinComponent{
       private LinkedinService: LinkedinService
    ){}
 
+   ngOnInit(): void{
+      const code = window.location.href.split('code=').slice(1).toString();
+      console.log(code);
+      if(code){
+         console.log("ok");
+      }
+   }
+
+   logLiUser(): void{
+
+      this.LinkedinService.logLiUser();
+
+   }
 
 
 }

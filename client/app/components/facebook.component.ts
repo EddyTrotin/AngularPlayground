@@ -23,9 +23,7 @@ export class FacebookComponent implements OnInit {
    }
 
    logFbUser(): void{
-
       this.FacebookService.logFbUser();
-
    }
 
    setFbAccessToken(code : string) : void{
@@ -41,9 +39,8 @@ export class FacebookComponent implements OnInit {
 
       this.FacebookService.getFbInfos().subscribe(infos => {
          this.infos = infos;
-
          console.log(this.infos);
-
+         console.log("dafuk ?");
          // console.log("Location : " + this.locationFb);
       })
 

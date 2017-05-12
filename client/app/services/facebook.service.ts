@@ -12,18 +12,20 @@ export class FacebookService{
       console.log('App Service Initialized...');
    }
 
+   api : string = "rainbowdata.api.facebook"
+
    logFbUser() : void{
-       window.location.href = "rainbowdata.api.facebook/getFbCode";
+       window.location.href = this.api + "/getFbCode";
    }
 
    setFbAccessToken(code : string){
       console.log("calling setFbAccessToken");
-      return this.http.get('/rainbowdata.api.facebook/setFbAccessToken/' + code).map(res => res);
+      return this.http.get(this.api + '/setFbAccessToken/' + code).map(res => res);
 
    }
 
    getFbInfos(){
-      return this.http.get('/rainbowdata.api.facebook/getFbInfos').map(res => res.json());
+      return this.http.get(this.api + '/getFbInfos').map(res => res.json());
    }
 
 }

@@ -10,14 +10,20 @@ var core_1 = require("@angular/core");
 require("rxjs/add/operator/switchMap");
 var facebook_component_1 = require("./facebook.component");
 var facebook_service_1 = require("../services/facebook.service");
+var linkedin_component_1 = require("./linkedin.component");
+var linkedin_service_1 = require("../services/linkedin.service");
 var AppComponent = (function () {
     function AppComponent() {
         this.fbService = new facebook_service_1.FacebookService(this.http);
         this.fbComponent = new facebook_component_1.FacebookComponent(this.fbService);
+        this.liService = new linkedin_service_1.LinkedinService(this.http);
+        this.liComponent = new linkedin_component_1.LinkedinComponent(this.liService);
     }
     AppComponent.prototype.logFbUser = function () {
-        console.log("ki");
         this.fbComponent.logFbUser();
+    };
+    AppComponent.prototype.logLiUser = function () {
+        this.liComponent.logLiUser();
     };
     return AppComponent;
 }());

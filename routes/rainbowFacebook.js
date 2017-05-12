@@ -15,21 +15,25 @@ router.get('/getFbCode', function(req, res){
 // Call this when the code is in the URL (after code=)
 router.get('/setFbAccessToken/:code', function(req, response){
 
-   const code = req.params.code;
+   if(!token){
+      const code = req.params.code;
+      const uri = "https://graph.facebook.com/v2.9/oauth/access_token?client_id="+
+      config.client_id +"&redirect_uri="+ config.redirect_uri +"&client_secret="+ config.client_secret +"&code="+ code +"";
 
-   const uri = "https://graph.facebook.com/v2.9/oauth/access_token?client_id="+
-   config.client_id +"&redirect_uri="+ config.redirect_uri +"&client_secret="+ config.client_secret +"&code="+ code +"";
+      https.get(uri, function(res){
 
-   https.get(uri, function(res){
+         console.log("Got response: " + res.statusCode);
 
-      console.log("Got response: " + res.statusCode);
+         res.on('data', function (body, res) {
+            token = JSON.parse(body).access_token;
+            response.sendStatus(200); // Send the confirmation so that the client know that the request is completed
+         });
 
-      res.on('data', function (body, res) {
-         token = JSON.parse(body).access_token;
-         response.sendStatus(200); // Send the confirmation so that the client know that the request is completed
       });
-
-   });
+   }
+   else{
+      response.sendStatus(200);
+   }
 
 });
 
@@ -38,6 +42,7 @@ router.get('/setFbAccessToken/:code', function(req, response){
 // Get facebooks informations set in config
 router.get('/getFbInfos', function(req, response){
 
+   console.log("token : " + token);
    FB.setAccessToken(token);
 
    FB.api('me', { fields: config.fields }, function (res) {

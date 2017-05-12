@@ -7,9 +7,20 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LinkedinService{
 
-
    constructor(private http:Http){
       console.log('App Service Initialized...');
+   }
+
+   api : string = "rainbowdata.api.linkedin";
+
+   logLiUser() : void{
+      window.location.href = this.api + "/getLiCode";
+   }
+
+   setLiAccessToken(code : string){
+      console.log("calling setLiAccessToken");
+      return this.http.get( this.api + '/setLiAccessToken/' + code).map(res => res);
+
    }
 
 }

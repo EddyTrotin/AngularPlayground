@@ -5,7 +5,7 @@ var config = require('../config/liconfig');
 var token = null;
 
 
-router.get('/getLICode', function(req, res){
+router.get('/getLiCode', function(req, res){
 
    const uri = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id="+ config.client_id + "&redirect_uri="+ config.redirect_uri + "&state=987654321&scope="+ config.scope +"";
 

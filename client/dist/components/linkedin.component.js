@@ -16,6 +16,16 @@ var LinkedinComponent = (function () {
     function LinkedinComponent(LinkedinService) {
         this.LinkedinService = LinkedinService;
     }
+    LinkedinComponent.prototype.ngOnInit = function () {
+        var code = window.location.href.split('code=').slice(1).toString();
+        console.log(code);
+        if (code) {
+            console.log("ok");
+        }
+    };
+    LinkedinComponent.prototype.logLiUser = function () {
+        this.LinkedinService.logLiUser();
+    };
     return LinkedinComponent;
 }());
 LinkedinComponent = __decorate([
