@@ -8,7 +8,6 @@ import 'rxjs/add/operator/map';
 export class LinkedinService{
 
    constructor(private http:Http){
-      console.log('App Service Initialized...');
    }
 
    api : string = "rainbowdata.api.linkedin";
@@ -21,6 +20,11 @@ export class LinkedinService{
       console.log("calling setLiAccessToken");
       return this.http.get( this.api + '/setLiAccessToken/' + code).map(res => res);
 
+   }
+
+   getLiInfos(){
+      console.log("dafuk");
+      return this.http.get(this.api + '/getLiInfos').map(res => res.json());
    }
 
 }

@@ -3,5 +3,6 @@
    "client_secret":  "OUEd2HDTSBk45ZNg",
    "scope":          "r_basicprofile,r_emailaddress",
    "redirect_uri":   "http://localhost:3000/",
-   "fields" :        "['name','birthday','email','location','education','work']"
+   "fields" :        "['name','birthday','email','location','education','work']",
+   "state" :         "987654321"
 }

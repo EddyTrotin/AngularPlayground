@@ -8,7 +8,8 @@ var token = null;
 
 router.get('/getFbCode', function(req, res){
 
-   res.redirect(`https://www.facebook.com/v2.9/dialog/oauth?client_id=`+ config.client_id + `&redirect_uri=` + config.redirect_uri + `&scope=`+ config.scope + ``);
+   res.redirect(`https://www.facebook.com/v2.9/dialog/oauth?client_id=`+
+   config.client_id + `&redirect_uri=` + config.redirect_uri + `&scope=`+ config.scope + ``);
 
 });
 
@@ -22,7 +23,7 @@ router.get('/setFbAccessToken/:code', function(req, response){
 
       https.get(uri, function(res){
 
-         console.log("Got response: " + res.statusCode);
+         // console.log("Got response: " + res.statusCode);
 
          res.on('data', function (body, res) {
             token = JSON.parse(body).access_token;
@@ -42,18 +43,21 @@ router.get('/setFbAccessToken/:code', function(req, response){
 // Get facebooks informations set in config
 router.get('/getFbInfos', function(req, response){
 
-   console.log("token : " + token);
-   FB.setAccessToken(token);
+   if(token){
+      FB.setAccessToken(token);
+      FB.api('me', { fields: config.fields }, function (res) {
+         if(!res || res.error) {
+            console.log(!res ? 'error occurred' : res.error);
+            return;
+         }
 
-   FB.api('me', { fields: config.fields }, function (res) {
-      if(!res || res.error) {
-         console.log(!res ? 'error occurred' : res.error);
-         return;
-      }
+         response.json(res);
 
-      response.json(res);
+      });
+   }
 
-   });
+
+
 });
 
 

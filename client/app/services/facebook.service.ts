@@ -9,7 +9,6 @@ export class FacebookService{
 
 
    constructor(private http:Http){
-      console.log('App Service Initialized...');
    }
 
    api : string = "rainbowdata.api.facebook"
@@ -19,7 +18,7 @@ export class FacebookService{
    }
 
    setFbAccessToken(code : string){
-      console.log("calling setFbAccessToken");
+      // console.log("calling setFbAccessToken");
       return this.http.get(this.api + '/setFbAccessToken/' + code).map(res => res);
 
    }

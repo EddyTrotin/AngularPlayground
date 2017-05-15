@@ -16,7 +16,6 @@ var LinkedinService = (function () {
     function LinkedinService(http) {
         this.http = http;
         this.api = "rainbowdata.api.linkedin";
-        console.log('App Service Initialized...');
     }
     LinkedinService.prototype.logLiUser = function () {
         window.location.href = this.api + "/getLiCode";
@@ -24,6 +23,10 @@ var LinkedinService = (function () {
     LinkedinService.prototype.setLiAccessToken = function (code) {
         console.log("calling setLiAccessToken");
         return this.http.get(this.api + '/setLiAccessToken/' + code).map(function (res) { return res; });
+    };
+    LinkedinService.prototype.getLiInfos = function () {
+        console.log("dafuk");
+        return this.http.get(this.api + '/getLiInfos').map(function (res) { return res.json(); });
     };
     return LinkedinService;
 }());

@@ -15,16 +15,32 @@ require("rxjs/add/operator/switchMap");
 var LinkedinComponent = (function () {
     function LinkedinComponent(LinkedinService) {
         this.LinkedinService = LinkedinService;
+        this.infos = null;
     }
     LinkedinComponent.prototype.ngOnInit = function () {
         var code = window.location.href.split('code=').slice(1).toString();
-        console.log(code);
         if (code) {
-            console.log("ok");
+            this.setLiAccessToken(code);
         }
     };
     LinkedinComponent.prototype.logLiUser = function () {
         this.LinkedinService.logLiUser();
+    };
+    LinkedinComponent.prototype.setLiAccessToken = function (code) {
+        var _this = this;
+        this.LinkedinService.setLiAccessToken(code).subscribe(function (res) {
+            if (res.status === 200) {
+                // console.log("OK : token set in server application");
+                _this.getLiInfos();
+            }
+        }, function (error) { return console.log("Error: ", error); });
+    };
+    LinkedinComponent.prototype.getLiInfos = function () {
+        var _this = this;
+        this.LinkedinService.getLiInfos().subscribe(function (infos) {
+            _this.infos = infos;
+            console.log(_this.infos);
+        });
     };
     return LinkedinComponent;
 }());

@@ -16,13 +16,12 @@ var FacebookService = (function () {
     function FacebookService(http) {
         this.http = http;
         this.api = "rainbowdata.api.facebook";
-        console.log('App Service Initialized...');
     }
     FacebookService.prototype.logFbUser = function () {
         window.location.href = this.api + "/getFbCode";
     };
     FacebookService.prototype.setFbAccessToken = function (code) {
-        console.log("calling setFbAccessToken");
+        // console.log("calling setFbAccessToken");
         return this.http.get(this.api + '/setFbAccessToken/' + code).map(function (res) { return res; });
     };
     FacebookService.prototype.getFbInfos = function () {

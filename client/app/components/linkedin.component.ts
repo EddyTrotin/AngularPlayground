@@ -12,11 +12,12 @@ export class LinkedinComponent{
       private LinkedinService: LinkedinService
    ){}
 
+   infos : any = null;
+
    ngOnInit(): void{
       const code = window.location.href.split('code=').slice(1).toString();
-      console.log(code);
       if(code){
-         console.log("ok");
+         this.setLiAccessToken(code);
       }
    }
 
@@ -26,5 +27,22 @@ export class LinkedinComponent{
 
    }
 
+   setLiAccessToken(code : string) : void{
+      this.LinkedinService.setLiAccessToken(code).subscribe(res =>{
+         if(res.status === 200){
+            // console.log("OK : token set in server application");
+            this.getLiInfos();
+         }
+      }, error => console.log("Error: ", error))
+   }
+
+   getLiInfos(): void{
+
+      this.LinkedinService.getLiInfos().subscribe(infos => {
+         this.infos = infos;
+         console.log(this.infos);
+      })
+
+   }
 
 }

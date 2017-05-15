@@ -16,7 +16,6 @@ export class FacebookComponent implements OnInit {
 
    ngOnInit(): void{
       const code = window.location.href.split('code=').slice(1).toString();
-      console.log(code);
       if(code){
          this.setFbAccessToken(code);
       }
@@ -29,7 +28,7 @@ export class FacebookComponent implements OnInit {
    setFbAccessToken(code : string) : void{
       this.FacebookService.setFbAccessToken(code).subscribe(res =>{
          if(res.status === 200){
-            console.log("OK : token set in server application");
+            // console.log("OK : token set in server application");
             this.getFbInfos();
          }
       }, error => console.log("Error: ", error))
@@ -37,12 +36,13 @@ export class FacebookComponent implements OnInit {
 
    getFbInfos(): void{
 
-      this.FacebookService.getFbInfos().subscribe(infos => {
-         this.infos = infos;
-         console.log(this.infos);
-         console.log("dafuk ?");
-         // console.log("Location : " + this.locationFb);
-      })
+      if(!this.infos){
+         this.FacebookService.getFbInfos().subscribe(infos => {
+            this.infos = infos
+         })
+      }
+
+
 
    }
 
