@@ -18,9 +18,7 @@ export class FacebookService{
    }
 
    setFbAccessToken(code : string){
-      // console.log("calling setFbAccessToken");
       return this.http.get(this.api + '/setFbAccessToken/' + code).map(res => res);
-
    }
 
    getFbInfos(){

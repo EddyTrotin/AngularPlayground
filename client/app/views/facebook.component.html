@@ -1,7 +1,7 @@
 
 <div *ngIf="infos">
 
-   <h2 class="text-center">Facebook informations</h2><br><br>
+   <h3 class="text-center">Facebook informations</h3><br><br>
 <div class="container">
 
    <table class="table">
@@ -21,7 +21,8 @@
             <td><span *ngIf="infos.birthday">{{infos.birthday}}</span></td>
             <td><span *ngIf="infos.email">{{infos.email}}</span></td>
             <td><span *ngIf="infos.location">{{infos.location.name}}</span></td>
-            <td><span *ngIf="infos.education">{{infos.education[0].school.name}}</span></td>
+            <td><span *ngIf="infos.education[1]">- {{infos.education[1].school.name}}</span>
+            <tr><span *ngIf="infos.education">- {{infos.education[0].school.name}}</span></tr></td>
             <td><span *ngIf="infos.work">{{infos.work[0].employer.name}}</span></td>
          </tr>
       </tbody>

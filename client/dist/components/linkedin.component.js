@@ -30,7 +30,6 @@ var LinkedinComponent = (function () {
         var _this = this;
         this.LinkedinService.setLiAccessToken(code).subscribe(function (res) {
             if (res.status === 200) {
-                // console.log("OK : token set in server application");
                 _this.getLiInfos();
             }
         }, function (error) { return console.log("Error: ", error); });
@@ -39,7 +38,6 @@ var LinkedinComponent = (function () {
         var _this = this;
         this.LinkedinService.getLiInfos().subscribe(function (infos) {
             _this.infos = infos;
-            console.log(_this.infos);
         });
     };
     return LinkedinComponent;

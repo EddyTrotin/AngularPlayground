@@ -28,7 +28,6 @@ export class FacebookComponent implements OnInit {
    setFbAccessToken(code : string) : void{
       this.FacebookService.setFbAccessToken(code).subscribe(res =>{
          if(res.status === 200){
-            // console.log("OK : token set in server application");
             this.getFbInfos();
          }
       }, error => console.log("Error: ", error))
@@ -36,13 +35,9 @@ export class FacebookComponent implements OnInit {
 
    getFbInfos(): void{
 
-      if(!this.infos){
-         this.FacebookService.getFbInfos().subscribe(infos => {
-            this.infos = infos
-         })
-      }
-
-
+      this.FacebookService.getFbInfos().subscribe(infos => {
+         this.infos = infos;
+      })
 
    }
 

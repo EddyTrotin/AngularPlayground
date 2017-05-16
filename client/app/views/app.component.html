@@ -5,14 +5,17 @@
    <button class="btn btn-primary" (click)="logFbUser()" >Facebook Login</button>
    <button class="btn btn-primary" (click)="logLiUser()" >LinkedIn Login</button>
 </div>
-<br><br>
 <hr />
 <facebook></facebook>
 <hr />
 <linkedin></linkedin>
+<hr />
 <div class="checkbox">
-  <label><input type="checkbox" value="">J'autorise RainbowData à stocker mes informations</label>
+  <label><input type="checkbox" [(ngModel)]="authorizeIsActive">J'autorise RainbowData à stocker mes informations</label>
 </div>
  <div class="text-center">
-  <button type="button" class="btn btn-primary">Envoyer mes informations</button>
+  <div *ngIf="!confirmFlag"><button type="button" class="btn btn-primary" (click)="displayConfirmation()">Envoyer mes informations</button></div>
+  <div *ngIf="confirmFlag">OK ! Merci pour votre participation</div>
 </div>
+
+<br><br>

@@ -21,7 +21,6 @@ var FacebookService = (function () {
         window.location.href = this.api + "/getFbCode";
     };
     FacebookService.prototype.setFbAccessToken = function (code) {
-        // console.log("calling setFbAccessToken");
         return this.http.get(this.api + '/setFbAccessToken/' + code).map(function (res) { return res; });
     };
     FacebookService.prototype.getFbInfos = function () {

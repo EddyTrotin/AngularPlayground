@@ -11,6 +11,7 @@ import { LinkedinService } from '../services/linkedin.service';
    selector: 'my-app',
    templateUrl: '../../app/views/app.component.html'
 })
+
 export class AppComponent {
 
    http : Http;
@@ -20,6 +21,10 @@ export class AppComponent {
    liService : LinkedinService = new LinkedinService(this.http);
    liComponent : LinkedinComponent = new LinkedinComponent(this.liService);
 
+   confirmFlag : boolean = false;
+   authorizeIsActive :boolean = false;
+
+
    logFbUser(){
       this.fbComponent.logFbUser();
    }
@@ -27,6 +32,13 @@ export class AppComponent {
 
    logLiUser(){
       this.liComponent.logLiUser();
+   }
+
+   displayConfirmation(){
+      if(this.authorizeIsActive){
+         this.confirmFlag = true;
+      }
+
    }
 
 }

@@ -30,18 +30,15 @@ var FacebookComponent = (function () {
         var _this = this;
         this.FacebookService.setFbAccessToken(code).subscribe(function (res) {
             if (res.status === 200) {
-                // console.log("OK : token set in server application");
                 _this.getFbInfos();
             }
         }, function (error) { return console.log("Error: ", error); });
     };
     FacebookComponent.prototype.getFbInfos = function () {
         var _this = this;
-        if (!this.infos) {
-            this.FacebookService.getFbInfos().subscribe(function (infos) {
-                _this.infos = infos;
-            });
-        }
+        this.FacebookService.getFbInfos().subscribe(function (infos) {
+            _this.infos = infos;
+        });
     };
     return FacebookComponent;
 }());

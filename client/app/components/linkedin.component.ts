@@ -30,7 +30,6 @@ export class LinkedinComponent{
    setLiAccessToken(code : string) : void{
       this.LinkedinService.setLiAccessToken(code).subscribe(res =>{
          if(res.status === 200){
-            // console.log("OK : token set in server application");
             this.getLiInfos();
          }
       }, error => console.log("Error: ", error))
@@ -40,7 +39,6 @@ export class LinkedinComponent{
 
       this.LinkedinService.getLiInfos().subscribe(infos => {
          this.infos = infos;
-         console.log(this.infos);
       })
 
    }

@@ -18,12 +18,19 @@ var AppComponent = (function () {
         this.fbComponent = new facebook_component_1.FacebookComponent(this.fbService);
         this.liService = new linkedin_service_1.LinkedinService(this.http);
         this.liComponent = new linkedin_component_1.LinkedinComponent(this.liService);
+        this.confirmFlag = false;
+        this.authorizeIsActive = false;
     }
     AppComponent.prototype.logFbUser = function () {
         this.fbComponent.logFbUser();
     };
     AppComponent.prototype.logLiUser = function () {
         this.liComponent.logLiUser();
+    };
+    AppComponent.prototype.displayConfirmation = function () {
+        if (this.authorizeIsActive) {
+            this.confirmFlag = true;
+        }
     };
     return AppComponent;
 }());
