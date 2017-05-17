@@ -16,8 +16,8 @@ export class LinkedinService{
       window.location.href = this.api + "/getLiCode";
    }
 
-   setLiAccessToken(code : string){
-      return this.http.get( this.api + '/setLiAccessToken/' + code).map(res => res);
+   setLiAccessToken(user_code : string){
+      return this.http.get( this.api + '/setLiAccessToken/' + user_code).map(res => res);
 
    }
 

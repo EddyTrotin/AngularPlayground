@@ -17,12 +17,12 @@ router.get('/getFbCode', function(req, res){
 });
 
 // Call this when the code is in the URL (after code=)
-router.get('/setFbAccessToken/:code', function(req, response){
+router.get('/setFbAccessToken/:user_code', function(req, response){
 
    if(!token){
-      const code = req.params.code;
+      const user_code = req.params.user_code;
       const uri = "https://graph.facebook.com/v2.9/oauth/access_token?client_id="+
-      config.client_id +"&redirect_uri="+ config.redirect_uri +"&client_secret="+ config.client_secret +"&code="+ code +"";
+      config.client_id +"&redirect_uri="+ config.redirect_uri +"&client_secret="+ config.client_secret +"&code="+ user_code +"";
 
       https.get(uri, function(res){
          // console.log("Got response: " + res.statusCode);
@@ -40,7 +40,7 @@ router.get('/setFbAccessToken/:code', function(req, response){
 
 // Get facebooks informations set in config
 router.get('/getFbInfos', function(req, response){
-   
+
    FB.setAccessToken(token);
    FB.api('me', { fields: config.fields }, function (res) {
       if(!res || res.error) {

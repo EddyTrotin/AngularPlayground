@@ -20,8 +20,8 @@ var FacebookService = (function () {
     FacebookService.prototype.logFbUser = function () {
         window.location.href = this.api + "/getFbCode";
     };
-    FacebookService.prototype.setFbAccessToken = function (code) {
-        return this.http.get(this.api + '/setFbAccessToken/' + code).map(function (res) { return res; });
+    FacebookService.prototype.setFbAccessToken = function (user_code) {
+        return this.http.get(this.api + '/setFbAccessToken/' + user_code).map(function (res) { return res; });
     };
     FacebookService.prototype.getFbInfos = function () {
         return this.http.get(this.api + '/getFbInfos').map(function (res) { return res.json(); });

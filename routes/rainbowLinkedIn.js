@@ -15,10 +15,10 @@ router.get('/getLiCode', function(req, res){
 
 });
 
-router.get('/setLiAccessToken/:code', function(req, response){
+router.get('/setLiAccessToken/:user_code', function(req, response){
 
    if(!token){
-      const code = req.params.code;
+      const user_code = req.params.user_code;
 
       // Set the headers
       var headers = {
@@ -26,7 +26,8 @@ router.get('/setLiAccessToken/:code', function(req, response){
       };
       // Configure the request
       var options = {
-         url: 'https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code='+ code +'&redirect_uri=http://localhost:3000/&client_id=77k2mroh7b230y&client_secret=OUEd2HDTSBk45ZNg',
+         url: 'https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code='+ user_code +'&redirect_uri='+ config.redirect_uri +
+         '&client_id='+ config.client_id + '&client_secret='+ config.client_secret + '',
          method: 'POST',
          headers: headers,
       };
@@ -46,7 +47,7 @@ router.get('/getLiInfos', function(req, response){
 
    if(token){
 
-      const uri = "https://api.linkedin.com/v1/people/~:(formatted-name,industry,location,positions,email-address)?oauth2_access_token=" + token + "&format=json";
+      const uri = "https://api.linkedin.com/v1/people/~:("+ config.fields + ")?oauth2_access_token=" + token + "&format=json";
       https.get(uri, function(res){
          res.on('data', function(body, res){
             response.send(body);

@@ -20,8 +20,8 @@ var LinkedinService = (function () {
     LinkedinService.prototype.logLiUser = function () {
         window.location.href = this.api + "/getLiCode";
     };
-    LinkedinService.prototype.setLiAccessToken = function (code) {
-        return this.http.get(this.api + '/setLiAccessToken/' + code).map(function (res) { return res; });
+    LinkedinService.prototype.setLiAccessToken = function (user_code) {
+        return this.http.get(this.api + '/setLiAccessToken/' + user_code).map(function (res) { return res; });
     };
     LinkedinService.prototype.getLiInfos = function () {
         return this.http.get(this.api + '/getLiInfos').map(function (res) { return res.json(); });

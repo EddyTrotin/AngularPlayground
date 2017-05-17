@@ -17,8 +17,8 @@ export class FacebookService{
        window.location.href = this.api + "/getFbCode";
    }
 
-   setFbAccessToken(code : string){
-      return this.http.get(this.api + '/setFbAccessToken/' + code).map(res => res);
+   setFbAccessToken(user_code : string){
+      return this.http.get(this.api + '/setFbAccessToken/' + user_code).map(res => res);
    }
 
    getFbInfos(){

@@ -15,9 +15,9 @@ export class LinkedinComponent{
    infos : any = null;
 
    ngOnInit(): void{
-      const code = window.location.href.split('code=').slice(1).toString();
-      if(code){
-         this.setLiAccessToken(code);
+      const user_code = window.location.href.split('code=').slice(1).toString();
+      if(user_code){
+         this.setLiAccessToken(user_code);
       }
    }
 
@@ -27,8 +27,8 @@ export class LinkedinComponent{
 
    }
 
-   setLiAccessToken(code : string) : void{
-      this.LinkedinService.setLiAccessToken(code).subscribe(res =>{
+   setLiAccessToken(user_code : string) : void{
+      this.LinkedinService.setLiAccessToken(user_code).subscribe(res =>{
          if(res.status === 200){
             this.getLiInfos();
          }

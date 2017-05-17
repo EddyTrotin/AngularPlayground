@@ -15,9 +15,9 @@ export class FacebookComponent implements OnInit {
    infos : any = null;
 
    ngOnInit(): void{
-      const code = window.location.href.split('code=').slice(1).toString();
-      if(code){
-         this.setFbAccessToken(code);
+      const user_code = window.location.href.split('code=').slice(1).toString();
+      if(user_code){
+         this.setFbAccessToken(user_code);
       }
    }
 
@@ -25,8 +25,8 @@ export class FacebookComponent implements OnInit {
       this.FacebookService.logFbUser();
    }
 
-   setFbAccessToken(code : string) : void{
-      this.FacebookService.setFbAccessToken(code).subscribe(res =>{
+   setFbAccessToken(user_code : string) : void{
+      this.FacebookService.setFbAccessToken(user_code).subscribe(res =>{
          if(res.status === 200){
             this.getFbInfos();
          }

@@ -18,17 +18,17 @@ var LinkedinComponent = (function () {
         this.infos = null;
     }
     LinkedinComponent.prototype.ngOnInit = function () {
-        var code = window.location.href.split('code=').slice(1).toString();
-        if (code) {
-            this.setLiAccessToken(code);
+        var user_code = window.location.href.split('code=').slice(1).toString();
+        if (user_code) {
+            this.setLiAccessToken(user_code);
         }
     };
     LinkedinComponent.prototype.logLiUser = function () {
         this.LinkedinService.logLiUser();
     };
-    LinkedinComponent.prototype.setLiAccessToken = function (code) {
+    LinkedinComponent.prototype.setLiAccessToken = function (user_code) {
         var _this = this;
-        this.LinkedinService.setLiAccessToken(code).subscribe(function (res) {
+        this.LinkedinService.setLiAccessToken(user_code).subscribe(function (res) {
             if (res.status === 200) {
                 _this.getLiInfos();
             }

@@ -18,17 +18,17 @@ var FacebookComponent = (function () {
         this.infos = null;
     }
     FacebookComponent.prototype.ngOnInit = function () {
-        var code = window.location.href.split('code=').slice(1).toString();
-        if (code) {
-            this.setFbAccessToken(code);
+        var user_code = window.location.href.split('code=').slice(1).toString();
+        if (user_code) {
+            this.setFbAccessToken(user_code);
         }
     };
     FacebookComponent.prototype.logFbUser = function () {
         this.FacebookService.logFbUser();
     };
-    FacebookComponent.prototype.setFbAccessToken = function (code) {
+    FacebookComponent.prototype.setFbAccessToken = function (user_code) {
         var _this = this;
-        this.FacebookService.setFbAccessToken(code).subscribe(function (res) {
+        this.FacebookService.setFbAccessToken(user_code).subscribe(function (res) {
             if (res.status === 200) {
                 _this.getFbInfos();
             }
