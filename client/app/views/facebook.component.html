@@ -21,7 +21,7 @@
             <td><span *ngIf="infos.birthday">{{infos.birthday}}</span></td>
             <td><span *ngIf="infos.email">{{infos.email}}</span></td>
             <td><span *ngIf="infos.location">{{infos.location.name}}</span></td>
-            <td><span *ngIf="infos.education[1]">- {{infos.education[1].school.name}}</span>
+            <td><span *ngIf="infos.education">- {{infos.education[1].school.name}}</span>
             <tr><span *ngIf="infos.education">- {{infos.education[0].school.name}}</span></tr></td>
             <td><span *ngIf="infos.work">{{infos.work[0].employer.name}}</span></td>
          </tr>

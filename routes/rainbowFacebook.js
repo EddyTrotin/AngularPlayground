@@ -41,6 +41,7 @@ router.get('/setFbAccessToken/:user_code', function(req, response){
 // Get facebooks informations set in config
 router.get('/getFbInfos', function(req, response){
 
+   if(token){
    FB.setAccessToken(token);
    FB.api('me', { fields: config.fields }, function (res) {
       if(!res || res.error) {
@@ -49,7 +50,7 @@ router.get('/getFbInfos', function(req, response){
       }
       response.json(res);
    });
-
+}
 });
 
 
