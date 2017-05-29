@@ -12,6 +12,7 @@ var facebook_component_1 = require("./facebook.component");
 var facebook_service_1 = require("../services/facebook.service");
 var linkedin_component_1 = require("./linkedin.component");
 var linkedin_service_1 = require("../services/linkedin.service");
+// This component display the basic view of the demonstrator (logo, footer...) and handle the two connection buttons for Facebook and LinkedIn
 var AppComponent = (function () {
     function AppComponent() {
         this.fbService = new facebook_service_1.FacebookService(this.http);
@@ -27,6 +28,12 @@ var AppComponent = (function () {
     AppComponent.prototype.logLiUser = function () {
         this.liComponent.logLiUser();
     };
+    /**
+     * Prevent the button "Envoyer mes informations" from being used if the checkbox below in the app.component view is not checked.
+     * Change the button with the "confirmFlag" var if the checkbox is checked.
+     * @method displayConfirmation
+     * @return void
+     */
     AppComponent.prototype.displayConfirmation = function () {
         if (this.authorizeIsActive) {
             this.confirmFlag = true;

@@ -6,6 +6,8 @@ import { FacebookService } from '../services/facebook.service';
 import { LinkedinComponent } from './linkedin.component';
 import { LinkedinService } from '../services/linkedin.service';
 
+// This component display the basic view of the demonstrator (logo, footer...) and handle the two connection buttons for Facebook and LinkedIn
+
 @Component({
    moduleId: module.id,
    selector: 'my-app',
@@ -24,16 +26,20 @@ export class AppComponent {
    confirmFlag : boolean = false;
    authorizeIsActive :boolean = false;
 
-
    logFbUser(){
       this.fbComponent.logFbUser();
    }
-
 
    logLiUser(){
       this.liComponent.logLiUser();
    }
 
+   /**
+    * Prevent the button "Envoyer mes informations" from being used if the checkbox below in the app.component view is not checked.
+    * Change the button with the "confirmFlag" var if the checkbox is checked.
+    * @method displayConfirmation
+    * @return void
+    */
    displayConfirmation(){
       if(this.authorizeIsActive){
          this.confirmFlag = true;

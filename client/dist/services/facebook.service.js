@@ -12,17 +12,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
+// Service used to pass the data from the API rainbowdata to the demonstrator
+// We use services to enhance the application and to make it more convenient to possible changes
+// by encapsulating the way the data is retrieved (the component do not know and care how the data he gets is retrieved)
 var FacebookService = (function () {
     function FacebookService(http) {
         this.http = http;
         this.api = "rainbowdata.api.facebook";
     }
+    /**
+     * Use the first route of the API to redirect to the social network autorisation page (and get the user_code)
+     * @method logFbUser
+     */
     FacebookService.prototype.logFbUser = function () {
         window.location.href = this.api + "/getFbCode";
     };
+    /**
+     * Use the second route to set the access token, exchanged with the user_code
+     * @method setFbAccessToken
+     * @param  {string}         user_code [code retrieved in the browser URI in FacebookComponent]
+     * @return void
+     */
     FacebookService.prototype.setFbAccessToken = function (user_code) {
         return this.http.get(this.api + '/setFbAccessToken/' + user_code).map(function (res) { return res; });
     };
+    /**
+     * Use the third route to get the user's informations
+     * @method getFbInfos
+     * @return {[JSON Object]}   [JSON containing all the user's personnal informations]
+     */
     FacebookService.prototype.getFbInfos = function () {
         return this.http.get(this.api + '/getFbInfos').map(function (res) { return res.json(); });
     };

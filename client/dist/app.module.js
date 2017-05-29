@@ -15,6 +15,7 @@ var app_component_1 = require("./components/app.component");
 var facebook_component_1 = require("./components/facebook.component");
 var linkedin_component_1 = require("./components/linkedin.component");
 var forms_1 = require("@angular/forms");
+// Configure and bootstrap the angular application
 var AppModule = (function () {
     function AppModule() {
     }

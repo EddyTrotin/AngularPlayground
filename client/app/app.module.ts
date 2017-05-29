@@ -9,6 +9,7 @@ import { FacebookComponent }  from './components/facebook.component';
 import { LinkedinComponent }  from './components/linkedin.component';
 import { FormsModule } from '@angular/forms';
 
+// Configure and bootstrap the angular application
 @NgModule({
    imports: [ BrowserModule, HttpModule, FormsModule ],
    declarations: [ AppComponent, FacebookComponent, LinkedinComponent ],
